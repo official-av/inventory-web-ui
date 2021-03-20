@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {LayoutComponent} from '../layout/layout.component';
 import {ClarityModule} from '@clr/angular';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 
 @NgModule({
@@ -10,9 +11,13 @@ import {ClarityModule} from '@clr/angular';
   ],
   imports: [
     CommonModule,
-    ClarityModule
+    ClarityModule,
+    FlexLayoutModule
   ],
-  exports: [LayoutComponent]
+  exports: [
+    LayoutComponent,
+    FlexLayoutModule
+  ]
 })
 export class SharedModule {
 }

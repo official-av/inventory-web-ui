@@ -1,0 +1,40 @@
+@import "../../../variables";
+
+
+header {
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 26%);
+  background-color: $primary;
+
+  .branding {
+    cursor: pointer
+  }
+
+  .logo {
+    width: 50px;
+    height: auto;
+
+
+  }
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  background-color: $bg;
+  width: 100vw;
+  height: calc(100vh - 3rem);
+
+  .card-main {
+    position: relative;
+    margin: 2rem;
+    width: 80vw;
+    height: 70vh;
+  }
+
+  .footer-text {
+    font-size: 14px;
+    color: $font;
+  }
+}
