@@ -1,10 +1,26 @@
 <header class="header-1">
   <!--  branding -->
-  <div class="branding">
+  <div class="branding" fxFlex="30">
     <a routerLink="">
       <img class="logo" src="assets/img/app_logo.svg" alt="inVentory Logo">
       <span class="title">inVentory</span>
     </a>
+  </div>
+  <div class="header-nav" fxFlex="60" fxLayoutAlign="end">
+    <a routerLink="" class="nav-link nav-text">Inventories</a>
+    <a routerLink="" class="nav-link nav-text">Users</a>
+  </div>
+  <div class="header-actions">
+    <div class="dropdown bottom-left">
+      <button class="nav-text dropdown-toggle" aria-label="open user profile">
+        <cds-icon shape="user"></cds-icon>
+        <span class="nav-text">username</span>
+        <cds-icon shape="angle" direction="up"></cds-icon>
+      </button>
+      <div class="dropdown-menu">
+        <a href="javascript://" class="dropdown=item">Log out</a>
+      </div>
+    </div>
   </div>
 </header>
 <div class="content" fxLayout="column" fxLayoutAlign="top center">

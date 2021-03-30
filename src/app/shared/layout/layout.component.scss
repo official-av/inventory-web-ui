@@ -31,6 +31,12 @@ header {
     margin: 2rem;
     width: 80vw;
     height: 70vh;
+    border-top: 5px solid $primary-dark;
+
+    .card-header {
+      font-weight: bold;
+      color: $primary-dark;
+    }
   }
 
   .footer-text {
