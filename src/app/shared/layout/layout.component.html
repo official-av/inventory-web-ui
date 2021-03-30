@@ -7,8 +7,8 @@
     </a>
   </div>
   <div class="header-nav" fxFlex="60" fxLayoutAlign="end">
-    <a routerLink="" class="nav-link nav-text">Inventories</a>
-    <a routerLink="" class="nav-link nav-text">Users</a>
+    <a [routerLink]="['/inventory']" routerLinkActive="active" class="nav-link nav-text">Inventories</a>
+    <a [routerLink]="['/users']" routerLinkActive="active" class="nav-link nav-text">Users</a>
   </div>
   <div class="header-actions">
     <div class="dropdown bottom-left">
@@ -25,9 +25,9 @@
 </header>
 <div class="content" fxLayout="column" fxLayoutAlign="top center">
   <div class="card card-main">
-    <div class="card-header">Card Header</div>
+    <div class="card-header">{{shared.curModule|titlecase}}</div>
     <div class="card-block">
-      <div class="card-text">My Card</div>
+      <router-outlet></router-outlet>
     </div>
   </div>
   <div class="footer-text">

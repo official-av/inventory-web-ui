@@ -31,7 +31,7 @@ header {
     margin: 2rem;
     width: 80vw;
     height: 70vh;
-    border-top: 5px solid $primary-dark;
+    border-top: 5px solid $secondary;
 
     .card-header {
       font-weight: bold;
@@ -40,6 +40,8 @@ header {
   }
 
   .footer-text {
+    position: absolute;
+    bottom: 10px;
     font-size: 14px;
     color: $font;
   }

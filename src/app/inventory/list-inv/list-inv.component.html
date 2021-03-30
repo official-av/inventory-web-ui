@@ -1,0 +1,18 @@
+<div class="inv-content" fxLayout="column" fxLayoutGap="5px">
+
+  <div class="action" fxFlex="100" fxLayoutAlign="end">
+    <clr-button-group class="btn-primary">
+      <clr-button (click)="create()" class="btn-primary">Create</clr-button>
+      <clr-button>Bulk Create</clr-button>
+      <clr-button>Bulk Update</clr-button>
+    </clr-button-group>
+  </div>
+
+  <ag-grid-angular
+    class="ag-theme-alpine"
+    pagination
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+  >
+  </ag-grid-angular>
+</div>

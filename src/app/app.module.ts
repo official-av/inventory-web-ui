@@ -3,10 +3,11 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {ClarityModule} from '@clr/angular';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {LayoutComponent} from './shared/layout/layout.component';
-import {SharedModule} from './shared/shared/shared.module';
+import {SharedModule} from './shared/shared.module';
+import {ToastrModule} from 'ngx-toastr';
+import {AuthGuard} from '@app/app/auth.guard';
+import { UsersModule } from './users/users.module';
 
 @NgModule({
   declarations: [
@@ -16,9 +17,11 @@ import {SharedModule} from './shared/shared/shared.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    ToastrModule.forRoot(),
+    UsersModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

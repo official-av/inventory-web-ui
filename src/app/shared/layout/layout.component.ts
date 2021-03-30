@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {SharedService} from "@app/app/shared/shared.service";
 
 @Component({
   selector: 'app-layout',
@@ -8,7 +9,7 @@ import {Component, OnInit} from '@angular/core';
 export class LayoutComponent implements OnInit {
   currentYear = new Date().getFullYear().toString();
 
-  constructor() {
+  constructor(public shared: SharedService) {
   }
 
   ngOnInit(): void {
