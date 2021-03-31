@@ -11,16 +11,16 @@
     <a [routerLink]="['/users']" routerLinkActive="active" class="nav-link nav-text">Users</a>
   </div>
   <div class="header-actions">
-    <div class="dropdown bottom-left">
-      <button class="nav-text dropdown-toggle" aria-label="open user profile">
+    <clr-dropdown>
+      <button clrDropdownTrigger class="nav-text dropdown-toggle" aria-label="open user profile">
         <cds-icon shape="user"></cds-icon>
-        <span class="nav-text">username</span>
-        <cds-icon shape="angle" direction="up"></cds-icon>
+        <span class="nav-text">{{userDetails.fname|slice:0:1}}. {{userDetails.lname}}</span>
+        <cds-icon shape="angle" direction="down"></cds-icon>
       </button>
-      <div class="dropdown-menu">
-        <a href="javascript://" class="dropdown=item">Log out</a>
-      </div>
-    </div>
+      <clr-dropdown-menu clrPosition="bottom-right">
+        <a role="button" (click)="shared.logout()" class="dropdown-item">Log out</a>
+      </clr-dropdown-menu>
+    </clr-dropdown>
   </div>
 </header>
 <div class="content" fxLayout="column" fxLayoutAlign="top center">

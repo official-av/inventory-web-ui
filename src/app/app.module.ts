@@ -7,7 +7,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SharedModule} from './shared/shared.module';
 import {ToastrModule} from 'ngx-toastr';
 import {AuthGuard} from '@app/app/auth.guard';
-import { UsersModule } from './users/users.module';
+import {UsersModule} from './users/users.module';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import {AppInterceptor} from "@app/app/app.interceptor";
 
 @NgModule({
   declarations: [
@@ -19,9 +21,13 @@ import { UsersModule } from './users/users.module';
     BrowserAnimationsModule,
     SharedModule,
     ToastrModule.forRoot(),
-    UsersModule
+    UsersModule,
+    HttpClientModule
   ],
-  providers: [AuthGuard],
+  providers: [
+    AuthGuard,
+    {provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

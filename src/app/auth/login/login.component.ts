@@ -4,6 +4,7 @@ import {environment} from '@app/environments/environment';
 import {AuthService} from '@app/app/auth/auth.service';
 import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
+import {SharedService} from "@app/app/shared/shared.service";
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', [Validators.pattern(environment.pwdRegex), Validators.required]),
   });
 
-  constructor(private auth: AuthService, private toastr: ToastrService, private router: Router) {
+  constructor(private auth: AuthService, private toastr: ToastrService, private shared: SharedService) {
   }
 
   ngOnInit(): void {
@@ -26,8 +27,7 @@ export class LoginComponent implements OnInit {
     this.auth.login(this.loginForm.get('email').value, this.loginForm.get('password').value).subscribe((val: any) => {
         console.log(val);
         this.toastr.success(val.message);
-        localStorage.setItem('token', val.data.token);
-        this.router.navigate(['']);
+        this.shared.setUserToken(val.token);
       },
       err => this.toastr.error(err.message)
     );

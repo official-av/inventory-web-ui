@@ -6,7 +6,6 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {RouterModule} from '@angular/router';
 import {SharedService} from '@app/app/shared/shared.service';
 import {AgGridModule} from 'ag-grid-angular';
-import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -15,14 +14,12 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     CommonModule,
-    HttpClientModule,
     ClarityModule,
     FlexLayoutModule,
     RouterModule,
     AgGridModule
   ],
   exports: [
-    HttpClientModule,
     LayoutComponent,
     FlexLayoutModule,
     ClarityModule,
