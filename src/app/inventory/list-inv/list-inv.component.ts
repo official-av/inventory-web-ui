@@ -11,7 +11,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class ListInvComponent implements OnInit {
   columnDefs = [
-    {field: 'id'},
+    {field: 'id', width: 150},
     {field: 'name', sortable: true, filter: true},
     {field: 'weight', sortable: true, filter: true},
     {field: 'price', sortable: true, filter: true},
