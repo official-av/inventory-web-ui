@@ -1,0 +1,32 @@
+<div [formGroup]="userForm" class="user-form" fxLayout="column"
+     fxLayoutGap="10px">
+  <div class="name-container" fxLayout="row" fxLayoutGap="20px">
+    <!--fname-->
+    <clr-input-container fxLayout="row" fxLayoutGap="20px">
+      <label>First Name</label>
+      <input clrInput placeholder="Enter first name" name="fname" formControlName="fname"/>
+    </clr-input-container>
+    <!--lname-->
+    <clr-input-container fxLayout="row" fxLayoutGap="20px">
+      <label>Last Name</label>
+      <input clrInput placeholder="Enter last name" name="fname" formControlName="lname"/>
+    </clr-input-container>
+  </div>
+  <!--  email -->
+  <div class="credentials-container" fxLayout="row" fxLayoutGap="20px">
+    <clr-input-container fxLayout="row" fxLayoutGap="20px">
+      <label>Email</label>
+      <input type="text" name="email" clrInput placeholder="Email" formControlName="email"/>
+    </clr-input-container>
+    <clr-password-container fxLayout="row" fxLayoutGap="20px">
+      <label>Password</label>
+      <input type="password" name="password" clrPassword placeholder="Password" formControlName="password"/>
+    </clr-password-container>
+  </div>
+  <!--  contact -->
+  <clr-input-container fxLayout="row" fxLayoutGap="20px">
+    <label>Contact</label>
+    <input clrInput placeholder="Enter contact" name="contact" formControlName="contact"/>
+  </clr-input-container>
+  <button type="button" [disabled]="userForm.invalid" (click)="doSubmit()" class="btn btn-primary">Submit</button>
+</div>
