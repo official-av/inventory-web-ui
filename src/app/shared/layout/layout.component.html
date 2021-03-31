@@ -14,8 +14,8 @@
     <clr-dropdown>
       <button clrDropdownTrigger class="nav-text dropdown-toggle" aria-label="open user profile">
         <cds-icon shape="user"></cds-icon>
-        <span class="nav-text">{{userDetails.fname|slice:0:1}}. {{userDetails.lname}}</span>
-        <cds-icon shape="angle" direction="down"></cds-icon>
+        <span class="nav-text user-name-span">{{userDetails.fname|slice:0:1}}. {{userDetails.lname}}</span>
+        <cds-icon shape="angle" direction="up"></cds-icon>
       </button>
       <clr-dropdown-menu clrPosition="bottom-right">
         <a role="button" (click)="shared.logout()" class="dropdown-item">Log out</a>

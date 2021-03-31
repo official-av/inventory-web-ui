@@ -3,7 +3,6 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {environment} from '@app/environments/environment';
 import {AuthService} from '@app/app/auth/auth.service';
 import {ToastrService} from 'ngx-toastr';
-import {Router} from '@angular/router';
 import {SharedService} from "@app/app/shared/shared.service";
 
 @Component({
@@ -27,7 +26,7 @@ export class LoginComponent implements OnInit {
     this.auth.login(this.loginForm.get('email').value, this.loginForm.get('password').value).subscribe((val: any) => {
         console.log(val);
         this.toastr.success(val.message);
-        this.shared.setUserToken(val.token);
+        this.shared.setUserToken(val.data.token);
       },
       err => this.toastr.error(err.message)
     );
