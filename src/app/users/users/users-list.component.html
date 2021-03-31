@@ -1,1 +1,15 @@
-<button class="btn btn-primary" [routerLink]="['create']">Create</button>
+
+<div class="user-content" fxLayout="column" fxLayoutGap="5px">
+
+  <div class="action" fxLayoutAlign="end">
+    <button class="btn btn-primary" [routerLink]="['create']">Create</button>
+  </div>
+
+  <ag-grid-angular
+    class="ag-theme-alpine"
+    pagination
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+  >
+  </ag-grid-angular>
+</div>
