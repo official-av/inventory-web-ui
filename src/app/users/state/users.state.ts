@@ -4,4 +4,5 @@ import {createSelector} from '@ngrx/store';
 import {selectUserState} from '@app/app/app.state';
 
 export const selectUsersListState = createSelector(selectUserState, (s: UserState) => s.listUsersState);
+export const selectCreateUserState = createSelector(selectUserState, (s: UserState) => s.createUserState);
 export const usersEffectsArr = [UsersEffects];

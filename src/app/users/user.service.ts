@@ -5,14 +5,16 @@ import {User} from '@app/app/_interfaces/User.interface';
 import {flatMap} from 'rxjs/operators';
 import {INVResponse} from '@app/app/_interfaces/INVResponse.interface';
 import {of} from 'rxjs';
+import {ToastrService} from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   userURL = `${environment.baseURL}/user`;
+  registerURL = `${environment.baseURL}/register`;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private toastr: ToastrService) {
   }
 
   public getAllUsers() {
@@ -20,5 +22,9 @@ export class UserService {
       .pipe(
         flatMap((val: INVResponse) => of(val.data as Array<User>))
       );
+  }
+
+  public registerUser(user: User) {
+    return this.http.post(this.registerURL, user);
   }
 }
