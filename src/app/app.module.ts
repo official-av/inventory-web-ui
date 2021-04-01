@@ -8,8 +8,11 @@ import {SharedModule} from './shared/shared.module';
 import {ToastrModule} from 'ngx-toastr';
 import {AuthGuard} from '@app/app/auth.guard';
 import {UsersModule} from './users/users.module';
-import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-import {AppInterceptor} from "@app/app/app.interceptor";
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {AppInterceptor} from '@app/app/app.interceptor';
+import {StoreModule} from '@ngrx/store';
+import {EffectsModule} from '@ngrx/effects';
+import {effects, initialState, reducers} from '@app/app/app.state';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,8 @@ import {AppInterceptor} from "@app/app/app.interceptor";
     BrowserAnimationsModule,
     SharedModule,
     ToastrModule.forRoot(),
+    StoreModule.forRoot(reducers, {initialState}),
+    EffectsModule.forRoot(effects),
     UsersModule,
     HttpClientModule
   ],

@@ -5,6 +5,6 @@ export interface User {
   email: string;
   password?: string;
   contact: string;
-  createdAt?: string;
-  isAdmin?: boolean;
+  created?: string;
+  admin?: boolean;
 }

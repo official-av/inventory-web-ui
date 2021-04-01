@@ -27,7 +27,7 @@ export class SharedService {
     const parsedToken = parseJWT(token);
     this.userDetails = {
       id: parsedToken.id,
-      isAdmin: parsedToken.isAdmin,
+      admin: parsedToken.isAdmin,
       email: parsedToken.email,
       lname: parsedToken.lname,
       fname: parsedToken.fname

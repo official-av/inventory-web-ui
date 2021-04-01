@@ -1,4 +1,10 @@
 import {Component, OnInit} from '@angular/core';
+import {User} from '@app/app/_interfaces/User.interface';
+import {Observable} from 'rxjs';
+import {State} from '@app/app/_interfaces/State.interface';
+import {select, Store} from '@ngrx/store';
+import {InitiateGetUsers} from '@app/app/users/state/users.actions';
+import {selectUsersListState} from '@app/app/users/state/users.state';
 
 @Component({
   selector: 'app-users-list',
@@ -6,6 +12,7 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./users-list.component.scss']
 })
 export class UsersListComponent implements OnInit {
+  usersData$: Observable<Array<User>>;
   columnDefs = [
     {field: 'id', width: 150},
     {field: 'fname', headerName: 'First Name', sortable: true, filter: true},
@@ -15,15 +22,12 @@ export class UsersListComponent implements OnInit {
     // {field: 'createdAt'},
   ];
 
-  rowData = [
-    {fname: 'Anmol', lname: 'Vashistha', email: 'av@gmail.com', contact: '8899889988', id: 1},
-    {fname: 'John', lname: 'Doe', email: 'johndoe@gmail.com', contact: '7755775577', id: 2},
-  ];
-
-  constructor() {
+  constructor(private store: Store<State>) {
+    this.store.dispatch(new InitiateGetUsers(null));
   }
 
   ngOnInit(): void {
+    this.usersData$ = this.store.pipe(select(selectUsersListState));
   }
 
 }
