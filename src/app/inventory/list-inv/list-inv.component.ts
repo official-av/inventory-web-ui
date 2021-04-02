@@ -1,8 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {InventoryService} from "@app/app/inventory/inventory.service";
 import {ToastrService} from 'ngx-toastr';
-import {INVResponse} from "@app/app/_interfaces/INVResponse.interface";
 import {ActivatedRoute, Router} from '@angular/router';
+import {Inventory} from '@app/app/_interfaces/Inventory.interface';
+import {Observable} from 'rxjs';
+import {State} from '@app/app/_interfaces/State.interface';
+import {select, Store} from '@ngrx/store';
+import {GetInventoriesInit} from '@app/app/inventory/state/inventory.actions';
+import {selectListInventoryState} from '@app/app/inventory/state/inventory.state';
 
 @Component({
   selector: 'app-inventory',
@@ -10,6 +14,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./list-inv.component.scss']
 })
 export class ListInvComponent implements OnInit {
+  inventoriesData$: Observable<Array<Inventory>>;
   columnDefs = [
     {field: 'id', width: 150},
     {field: 'name', sortable: true, filter: true},
@@ -17,13 +22,7 @@ export class ListInvComponent implements OnInit {
     {field: 'price', sortable: true, filter: true},
   ];
 
-  rowData = [
-    {name: 'Maggi', weight: '200g', price: 12, id: 1},
-    {name: 'Maggi 2', weight: '200g', price: 12, id: 2},
-    {name: 'Maggi 3', weight: '200g', price: 12, id: 3}
-  ];
-
-  constructor(private inventoryService: InventoryService,
+  constructor(private store: Store<State>,
               private toast: ToastrService,
               private router: Router,
               private activatedRoute: ActivatedRoute) {
@@ -31,15 +30,11 @@ export class ListInvComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.inventoriesData$ = this.store.pipe(select(selectListInventoryState));
   }
 
   fetchInventories() {
-    this.inventoryService.getInventories().subscribe((res: INVResponse) => {
-      console.log(res);
-      this.rowData = res.data;
-      this.toast.success(res.message);
-    }, err => this.toast.error(err.message));
-
+    this.store.dispatch(new GetInventoriesInit());
   }
 
   create() {
