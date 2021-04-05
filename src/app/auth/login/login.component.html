@@ -13,7 +13,7 @@
         <label class="clr-sr-only">Password</label>
         <input type="password" name="password" clrPassword placeholder="Password" formControlName="password"/>
       </clr-password-container>
-      <button type="button" [disabled]="loginForm.invalid" (click)="doSubmit()" class="btn btn-primary">Login</button>
+      <button type="button" [disabled]="loginForm.invalid" (keyup.enter)="doSubmit()" (click)="doSubmit()" class="btn btn-primary">Login</button>
     </div>
   </form>
 </div>

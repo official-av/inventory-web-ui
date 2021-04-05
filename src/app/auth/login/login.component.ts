@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', [Validators.pattern(environment.pwdRegex), Validators.required]),
   });
 
-  constructor(private auth: AuthService, private toastr: ToastrService, private shared: SharedService) {
+  constructor(private auth: AuthService, private shared: SharedService) {
   }
 
   ngOnInit(): void {
@@ -24,12 +24,8 @@ export class LoginComponent implements OnInit {
 
   public doSubmit() {
     this.auth.login(this.loginForm.get('email').value, this.loginForm.get('password').value).subscribe((val: any) => {
-        console.log(val);
-        this.toastr.success(val.message);
         this.shared.setUserToken(val.data.token);
-      },
-      err => this.toastr.error(err.message)
-    );
+      });
   }
 
 }

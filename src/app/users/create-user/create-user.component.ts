@@ -8,8 +8,6 @@ import {CREATE_USER_COMPLETE, InitiateCreateUser, UpdateCreateUser} from '@app/a
 import {selectCreateUserState} from '@app/app/users/state/users.state';
 import {Observable} from 'rxjs';
 import {Actions, ofType} from '@ngrx/effects';
-import {INVResponse} from '@app/app/_interfaces/INVResponse.interface';
-import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-user',
@@ -26,14 +24,10 @@ export class CreateUserComponent implements OnInit {
     contact: new FormControl('', [Validators.required, Validators.pattern(/^[1-9]{10}$/)])
   });
 
-  constructor(private store: Store<State>, private action$: Actions, private toastr: ToastrService) {
+  constructor(private store: Store<State>, private action$: Actions) {
     this.action$.pipe(
       ofType(CREATE_USER_COMPLETE)
-    ).subscribe((val: any) => {
-      const res = val.payload as INVResponse;
-      this.toastr.success(res.message);
-      this.resetForm();
-    }, err => this.toastr.error(err.message));
+    ).subscribe(val => this.resetForm());
   }
 
   ngOnInit(): void {

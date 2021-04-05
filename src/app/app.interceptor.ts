@@ -35,7 +35,9 @@ export class AppInterceptor implements HttpInterceptor {
       // hide loader when request completes in success
       tap((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
-          // this.loaderService.hide();
+          if (event.status) {
+            this.toastr.success(event.body.message);
+          }
         }
       }),
       catchError(error => {

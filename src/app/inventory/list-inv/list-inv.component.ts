@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {ToastrService} from 'ngx-toastr';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Inventory} from '@app/app/_interfaces/Inventory.interface';
 import {Observable} from 'rxjs';
@@ -23,7 +22,6 @@ export class ListInvComponent implements OnInit {
   ];
 
   constructor(private store: Store<State>,
-              private toast: ToastrService,
               private router: Router,
               private activatedRoute: ActivatedRoute) {
     this.fetchInventories();
