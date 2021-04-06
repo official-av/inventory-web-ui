@@ -11,6 +11,7 @@ import {of} from 'rxjs';
 })
 export class InventoryService {
   inventoryURL = `${environment.baseURL}/inventory`;
+  usersURL = `${environment.baseURL}/users`;
 
   constructor(private http: HttpClient) {
   }
@@ -41,6 +42,10 @@ export class InventoryService {
   }
 
   deleteBulkInventories() {
+  }
+
+  searchUsers(keyword: string) {
+    return this.http.get(`${this.usersURL}?q=${keyword}`);
   }
 
   // endregion

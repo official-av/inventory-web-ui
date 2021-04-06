@@ -14,7 +14,7 @@ export const reducers = {
 
 // feature initial states
 export const initialUsersState = {createUserState: {} as User, listUsersState: [] as User[]} as UserState;
-export const initialInventoryState = {list: [] as Array<Inventory>} as InventoryState;
+export const initialInventoryState = {list: [] as Array<Inventory>, create: {} as Inventory} as InventoryState;
 
 // app-level initial state
 export const initialState = {userState: initialUsersState, inventoryState: initialInventoryState} as State;

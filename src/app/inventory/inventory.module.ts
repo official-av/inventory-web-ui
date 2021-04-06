@@ -11,12 +11,14 @@ import {inventoryReducers} from '@app/app/inventory/state/inventory.reducers';
 import {inventoryEffectsArr} from '@app/app/inventory/state/inventory.state';
 import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [InventoryComponent, CreateInvComponent, ListInvComponent],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     SharedModule,
     InventoryRoutingModule,
     StoreModule.forFeature('inventoryState', inventoryReducers),

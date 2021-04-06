@@ -1,1 +1,26 @@
-<p>create-inv works!</p>
+<div [formGroup]="invForm" class="inventory-form" fxLayout="column" fxLayoutGap="10px">
+  <!-- inventory name -->
+  <clr-input-container fxLayout="row" fxLayoutGap="20px">
+    <label>Name</label>
+    <input clrInput placeholder="Enter inventory name" name="name" formControlName="name"/>
+  </clr-input-container>
+  <!-- inventory weight -->
+  <clr-input-container fxLayout="row" fxLayoutGap="20px">
+    <label>Weight</label>
+    <input clrInput placeholder="Enter inventory weight" name="weight" formControlName="weight"/>
+  </clr-input-container>
+  <!-- inventory price -->
+  <clr-input-container fxLayout="row" fxLayoutGap="20px">
+    <label>Price</label>
+    <input type="number" clrInput placeholder="Enter inventory price" name="price" formControlName="price"/>
+  </clr-input-container>
+  <!-- inventory users -->
+  <clr-datalist-container>
+    <label>Users</label>
+    <input clrDatalistInput formControlName="users" name="Users"/>
+    <datalist>
+      <option *ngFor="let user of searchedUsers$|async" [value]="user"></option>
+    </datalist>
+  </clr-datalist-container>
+  <button type="button" [disabled]="invForm.invalid" (click)="doSubmit()" class="btn btn-primary">Submit</button>
+</div>
