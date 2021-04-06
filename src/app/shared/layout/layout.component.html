@@ -8,7 +8,7 @@
   </div>
   <div class="header-nav" fxFlex="60" fxLayoutAlign="end">
     <a [routerLink]="['/inventory']" routerLinkActive="active" class="nav-link nav-text">Inventories</a>
-    <a [routerLink]="['/users']" routerLinkActive="active" class="nav-link nav-text">Users</a>
+    <a *ngIf="userDetails?.admin" [routerLink]="['/users']" routerLinkActive="active" class="nav-link nav-text">Users</a>
   </div>
   <div class="header-actions">
     <clr-dropdown>

@@ -58,7 +58,7 @@ export class AppInterceptor implements HttpInterceptor {
         // this.authService.logout();
         return of(err.message);
       case 403: // FORBIDDEN
-        this.toastr.error('You are not authorised to access this application.', 'Error', {disableTimeOut: true});
+        this.toastr.error(err.error.message, 'Error');
         // this.authService.logout();
         return of(err.message);
       case 404: // PAGE_NOT_FOUND
