@@ -36,7 +36,7 @@ export class CreateUserComponent implements OnInit {
   }
 
   private fillFormFromValues(user: User) {
-    if (Object.keys(user).length > 0) {
+    if (user && Object.keys(user).length > 0) {
       this.userForm.setValue(user);
     }
   }
