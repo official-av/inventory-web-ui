@@ -30,6 +30,7 @@
     "@webcomponents/webcomponentsjs": "^2.5.0",
     "ag-grid-angular": "^25.1.0",
     "ag-grid-community": "^25.1.0",
+    "ngx-chips": "^2.2.2",
     "ngx-toastr": "^13.2.1",
     "ngx-ui-loader": "^10.0.0",
     "rxjs": "~6.6.0",

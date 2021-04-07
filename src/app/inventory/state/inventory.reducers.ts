@@ -1,6 +1,7 @@
 import {InventoryState} from '@app/app/_interfaces/InventoryState.interface';
 import {
   CREATE_INVENTORY_DONE,
+  FETCH_INVENTORY_DONE,
   GET_INVENTORIES_DONE,
   InventoryActions,
   UPDATE_CREATE_INVENTORY
@@ -13,6 +14,9 @@ export const inventoryReducers = (state: InventoryState, action: InventoryAction
       return {...state, list: action.payload};
     case CREATE_INVENTORY_DONE:
       console.log('Reducer: ' + CREATE_INVENTORY_DONE);
+      return {...state, create: action.payload};
+    case FETCH_INVENTORY_DONE:
+      console.log('Reducer: ' + FETCH_INVENTORY_DONE);
       return {...state, create: action.payload};
     case UPDATE_CREATE_INVENTORY:
       console.log('Reducer: ' + UPDATE_CREATE_INVENTORY);

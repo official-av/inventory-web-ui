@@ -9,7 +9,8 @@ const routes: Routes = [
   {
     path: '', component: InventoryComponent, children: [
       {path: '', component: ListInvComponent},
-      {path: 'create', component: CreateInvComponent, canActivate: [AdminGuard]}
+      {path: 'create', component: CreateInvComponent, canActivate: [AdminGuard]},
+      {path: 'update/:id', component: CreateInvComponent, canActivate: [AdminGuard]}
     ]
   }
 ];

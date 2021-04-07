@@ -15,12 +15,16 @@
     <input type="number" clrInput placeholder="Enter inventory price" name="price" formControlName="price"/>
   </clr-input-container>
   <!-- inventory users -->
-  <clr-datalist-container>
+  <div class="users">
     <label>Users</label>
-    <input clrDatalistInput formControlName="users" name="Users"/>
-    <datalist>
-      <option *ngFor="let user of searchedUsers$|async" [value]="user"></option>
-    </datalist>
-  </clr-datalist-container>
+    <tag-input formControlName="users" [identifyBy]="'id'" [displayBy]="'fname'" [onlyFromAutocomplete]="true">
+      <tag-input-dropdown [identifyBy]="'id'" [displayBy]="'fname'" [autocompleteObservable]="searchUsers$">
+      </tag-input-dropdown>
+    </tag-input>
+    <!-- <input clrDatalistInput formControlName="users" name="Users"/>
+     <datalist>
+       <option *ngFor="let user of searchedUsers$|async" [value]="user.fname"></option>
+     </datalist>-->
+  </div>
   <button type="button" [disabled]="invForm.invalid" (click)="doSubmit()" class="btn btn-primary">Submit</button>
 </div>

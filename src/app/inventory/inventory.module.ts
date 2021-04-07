@@ -11,7 +11,8 @@ import {inventoryReducers} from '@app/app/inventory/state/inventory.reducers';
 import {inventoryEffectsArr} from '@app/app/inventory/state/inventory.state';
 import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
-import { ReactiveFormsModule } from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms';
+import {TagInputModule} from 'ngx-chips';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     ReactiveFormsModule,
     SharedModule,
+    TagInputModule,
     InventoryRoutingModule,
     StoreModule.forFeature('inventoryState', inventoryReducers),
     EffectsModule.forFeature(inventoryEffectsArr)

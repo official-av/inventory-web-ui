@@ -4,6 +4,12 @@ import {
   CREATE_INVENTORY_INIT,
   CreateInventoryDone,
   CreateInventoryInit,
+  DELETE_INVENTORY_INIT,
+  DeleteInventoryDone,
+  DeleteInventoryInit, EDIT_INVENTORY_INIT, EditInventoryDone, EditInventoryInit,
+  FETCH_INVENTORY_INIT,
+  FetchInventoryDone,
+  FetchInventoryInit,
   GET_INVENTORIES_INIT,
   GetInventoriesDone,
   GetInventoriesInit
@@ -31,5 +37,26 @@ export class InventoryEffects {
     ofType(CREATE_INVENTORY_INIT),
     switchMap((action: CreateInventoryInit) => this.invService.createInventory(action.payload)
       .pipe(map((res: INVResponse) => new CreateInventoryDone(res)))
+    ));
+
+  @Effect()
+  public fetchInventoryDetailsEffect$ = this.action$.pipe(
+    ofType(FETCH_INVENTORY_INIT),
+    switchMap((action: FetchInventoryInit) => this.invService.getInventoryDetailsByID(action.payload)
+      .pipe(map((res: Inventory) => new FetchInventoryDone(res)))
+    ));
+
+  @Effect()
+  public deleteInventoryEffect$ = this.action$.pipe(
+    ofType(DELETE_INVENTORY_INIT),
+    switchMap((action: DeleteInventoryInit) => this.invService.deleteInventory(action.payload)
+      .pipe(map((res: INVResponse) => new DeleteInventoryDone(res)))
+    ));
+
+  @Effect()
+  public editInventoryEffect$ = this.action$.pipe(
+    ofType(EDIT_INVENTORY_INIT),
+    switchMap((action: EditInventoryInit) => this.invService.updateInventory(action.payload)
+      .pipe(map((res: INVResponse) => new EditInventoryDone(res)))
     ));
 }

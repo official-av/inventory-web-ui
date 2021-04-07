@@ -7,11 +7,13 @@ import {RouterModule} from '@angular/router';
 import {SharedService} from '@app/app/shared/shared.service';
 import {AgGridModule} from 'ag-grid-angular';
 import {ReactiveFormsModule} from '@angular/forms';
+import {AGGridTemplateRendererComponent} from '@app/app/shared/agGridTemplateRenderer/ag-grid-template-renderer.component';
 
 
 @NgModule({
   declarations: [
-    LayoutComponent
+    LayoutComponent,
+    AGGridTemplateRendererComponent
   ],
   imports: [
     CommonModule,
@@ -19,10 +21,11 @@ import {ReactiveFormsModule} from '@angular/forms';
     FlexLayoutModule,
     RouterModule,
     ReactiveFormsModule,
-    AgGridModule
+    AgGridModule.withComponents([AGGridTemplateRendererComponent])
   ],
   exports: [
     LayoutComponent,
+    AGGridTemplateRendererComponent,
     FlexLayoutModule,
     ClarityModule,
     ReactiveFormsModule,

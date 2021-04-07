@@ -3,5 +3,5 @@ export interface Inventory {
   name: string;
   price: number;
   weight: string;
-  userIDs: string;
+  users: Array<any>;
 }
