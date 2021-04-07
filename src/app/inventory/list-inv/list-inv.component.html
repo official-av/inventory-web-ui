@@ -2,8 +2,8 @@
 
   <div class="action" fxFlex="100" fxLayoutAlign="end">
     <clr-button-group class="btn-primary">
-      <clr-button (click)="create()" class="btn-primary">Create</clr-button>
-      <clr-button [disabled]="true">Bulk Create</clr-button>
+      <clr-button *ngIf="sharedService?.userDetails?.admin" (click)="create()" class="btn-primary">Create</clr-button>
+      <clr-button *ngIf="sharedService?.userDetails?.admin" [disabled]="true">Bulk Create</clr-button>
       <clr-button [disabled]="true">Bulk Update</clr-button>
     </clr-button-group>
   </div>
@@ -15,4 +15,9 @@
     [columnDefs]="columnDefs"
   >
   </ag-grid-angular>
+
+  <ng-template #gridActionsColumn let-row>
+    <button title="Edit" class="btn btn-icon" (click)="edit(row)"><cds-icon shape="pencil"></cds-icon></button>
+    <button *ngIf="sharedService?.userDetails?.admin" title="Delete" class="btn btn-icon" (click)="delete(row)"><cds-icon shape="trash"></cds-icon></button>
+  </ng-template>
 </div>
