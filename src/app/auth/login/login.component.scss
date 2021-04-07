@@ -5,3 +5,15 @@
     width: 100% !important;
   }
 }
+
+.login-wrapper {
+  background: url('../../../assets/img/bg.svg');
+}
+
+form.login {
+  filter: drop-shadow(2px 4px 6px black);
+}
+
+.login-logo {
+  width: 250px;
+}
