@@ -1,9 +1,15 @@
-.user-form {
-  clr-input-container {
-    width: 300px;
-  }
-
-  label {
-    width: 100px;
-  }
+.clr-input {
+  width: 300px;
 }
+
+.clr-control-label {
+  width: 100px;
+}
+
+.btn-users-action {
+  position: absolute;
+  bottom: 20px;
+  width: 300px;
+  margin: 30px 0 0 120px;
+}
+
