@@ -14,7 +14,7 @@
     <clr-dropdown>
       <button clrDropdownTrigger class="nav-text dropdown-toggle" aria-label="open user profile">
         <cds-icon shape="user"></cds-icon>
-        <span class="nav-text user-name-span">{{userDetails.fname|slice:0:1}}. {{userDetails.lname}}</span>
+        <span class="nav-text user-name-span">{{userDetails?.fname|slice:0:1}}. {{userDetails?.lname}}</span>
         <cds-icon shape="angle" direction="up"></cds-icon>
       </button>
       <clr-dropdown-menu clrPosition="bottom-right">
@@ -25,7 +25,7 @@
 </header>
 <div class="content" fxLayout="column" fxLayoutAlign="top center">
   <div class="card card-main">
-    <div class="card-header">{{shared.curModule|titlecase}}</div>
+    <div class="card-header"><app-breadcrumbs></app-breadcrumbs></div>
     <div class="card-block">
       <router-outlet></router-outlet>
     </div>

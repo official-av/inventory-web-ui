@@ -8,12 +8,14 @@ import {SharedService} from '@app/app/shared/shared.service';
 import {AgGridModule} from 'ag-grid-angular';
 import {ReactiveFormsModule} from '@angular/forms';
 import {AGGridTemplateRendererComponent} from '@app/app/shared/agGridTemplateRenderer/ag-grid-template-renderer.component';
+import { BreadcrumbsComponent } from './layout/breadcrumbs/breadcrumbs.component';
 
 
 @NgModule({
   declarations: [
     LayoutComponent,
-    AGGridTemplateRendererComponent
+    AGGridTemplateRendererComponent,
+    BreadcrumbsComponent
   ],
   imports: [
     CommonModule,

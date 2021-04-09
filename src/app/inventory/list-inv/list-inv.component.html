@@ -17,7 +17,7 @@
   </ag-grid-angular>
 
   <ng-template #gridActionsColumn let-row>
-    <button title="Edit" class="btn btn-icon" (click)="edit(row)"><cds-icon shape="pencil"></cds-icon></button>
-    <button *ngIf="sharedService?.userDetails?.admin" title="Delete" class="btn btn-icon" (click)="delete(row)"><cds-icon shape="trash"></cds-icon></button>
+    <button title="Edit" class="btn btn-icon btn-primary" (click)="edit(row)"><cds-icon shape="pencil"></cds-icon></button>
+    <button *ngIf="sharedService?.userDetails?.admin" title="Delete" class="btn btn-icon btn-primary" (click)="delete(row)"><cds-icon shape="trash"></cds-icon></button>
   </ng-template>
 </div>

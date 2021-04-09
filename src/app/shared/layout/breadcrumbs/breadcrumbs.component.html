@@ -1,0 +1,6 @@
+<div class="breadcrumbs" fxLayoutGap="10px">
+  <ng-container *ngFor="let item of routesArr;let i = index">
+    <a class="breadcrumb-link" [routerLink]="['/'+item.route]">{{item.name|titlecase}}</a>
+    <cds-icon *ngIf="i!==routesArr.length-1" shape="angle" direction="right"></cds-icon>
+  </ng-container>
+</div>

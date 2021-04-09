@@ -2,13 +2,14 @@ import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {User} from "@app/app/_interfaces/User.interface";
 import {parseJWT} from "@app/app/shared/utils/parseJWT";
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedService {
   public curModule = '';
-  private _userDetails: User;
+  public userDetailsSubject$ = new BehaviorSubject<User>(null);
 
   constructor(private router: Router) {
     const token = localStorage.getItem('token');
@@ -35,11 +36,11 @@ export class SharedService {
   }
 
   public set userDetails(user: User) {
-    this._userDetails = user;
+    this.userDetailsSubject$.next(user);
   }
 
   public get userDetails(): User {
-    return {...this._userDetails};
+    return {...this.userDetailsSubject$.value};
   }
 
   public logout() {

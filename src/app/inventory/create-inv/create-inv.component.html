@@ -4,6 +4,7 @@
     <label>Name</label>
     <input clrInput placeholder="Enter inventory name" name="name" formControlName="name"/>
   </clr-input-container>
+
   <!-- inventory weight -->
   <clr-input-container fxLayout="row" fxLayoutGap="20px">
     <label>Weight</label>
@@ -15,9 +16,11 @@
     <input type="number" clrInput placeholder="Enter inventory price" name="price" formControlName="price"/>
   </clr-input-container>
   <!-- inventory users -->
-  <div class="users">
-    <label>Users</label>
-    <tag-input formControlName="users" [identifyBy]="'id'" [displayBy]="'fname'" [onlyFromAutocomplete]="true">
+  <div class="users clr-form-control" fxLayout="row" fxLayoutGap="20px">
+    <label class="clr-control-label">Users</label>
+    <tag-input placeholder="Add More Users" secondaryPlaceholder="Add Users" formControlName="users" [identifyBy]="'id'"
+               [displayBy]="'fname'"
+               [onlyFromAutocomplete]="true">
       <tag-input-dropdown [identifyBy]="'id'" [displayBy]="'fname'" [autocompleteObservable]="searchUsers$">
       </tag-input-dropdown>
     </tag-input>
@@ -26,5 +29,7 @@
        <option *ngFor="let user of searchedUsers$|async" [value]="user.fname"></option>
      </datalist>-->
   </div>
-  <button type="button" [disabled]="invForm.invalid" (click)="doSubmit()" class="btn btn-primary">Submit</button>
+  <button type="button" [disabled]="invForm.invalid" (click)="doSubmit()" class="btn-inv-action btn btn-primary">
+    Submit
+  </button>
 </div>

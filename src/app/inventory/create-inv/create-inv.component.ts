@@ -6,6 +6,7 @@ import {Actions, ofType} from '@ngrx/effects';
 import {
   CREATE_INVENTORY_DONE,
   CreateInventoryInit,
+  EDIT_INVENTORY_DONE,
   EditInventoryInit,
   FetchInventoryInit,
   UpdateCreateInventory
@@ -30,7 +31,7 @@ export class CreateInvComponent implements OnInit {
     name: new FormControl('', [Validators.required, Validators.maxLength(100)]),
     price: new FormControl(0, [Validators.required]),
     weight: new FormControl('', [Validators.required, Validators.maxLength(100)]),
-    users: new FormControl([])
+    users: new FormControl([], [Validators.required])
   });
   searchUsers$ = (text: string): Observable<any> => {
     return of(text).pipe(
@@ -56,7 +57,7 @@ export class CreateInvComponent implements OnInit {
       }
     );
     this.action$.pipe(
-      ofType(CREATE_INVENTORY_DONE)
+      ofType(CREATE_INVENTORY_DONE, EDIT_INVENTORY_DONE)
     ).subscribe(val => this.resetForm());
   }
 
@@ -74,13 +75,13 @@ export class CreateInvComponent implements OnInit {
   private resetForm() {
     this.invForm.reset();
     this.store.dispatch(new UpdateCreateInventory({} as Inventory));
+    this.router.navigate(['inventory']);
   }
 
   public doSubmit() {
     const inv = this.invForm.value as Inventory;
     this.store.dispatch(new UpdateCreateInventory(inv));
     inv.id ? this.store.dispatch(new EditInventoryInit(inv)) : this.store.dispatch(new CreateInventoryInit(inv));
-    this.router.navigate(['inventory']);
   }
 
 }

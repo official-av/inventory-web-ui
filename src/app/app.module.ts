@@ -56,7 +56,10 @@ const ngxLoaderConfiguration =
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-center',
+      preventDuplicates: true
+    }),
     StoreModule.forRoot(reducers, {initialState}),
     EffectsModule.forRoot(effects),
     UsersModule,

@@ -11,12 +11,12 @@ import {ClarityIcons, pencilIcon, trashIcon, userIcon} from '@cds/core/icon';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'algo-inventory-webUI';
 
   constructor(private router: Router, private shared: SharedService) {
     ClarityIcons.addIcons(userIcon, pencilIcon, trashIcon);
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)).subscribe(event => {
+      console.log(this.router.url.split('/'));
       this.shared.curModule = this.router.url.split('/')[1];
     });
   }
