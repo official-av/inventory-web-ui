@@ -13,6 +13,10 @@ export const DELETE_INVENTORY_INIT = 'Delete Inventory Init';
 export const DELETE_INVENTORY_DONE = 'Delete Inventory Done';
 export const EDIT_INVENTORY_INIT = 'Edit Inventory Init';
 export const EDIT_INVENTORY_DONE = 'Edit Inventory Done';
+export const BULK_CREATE_INVENTORY_INIT = 'Bulk Create Inventory Init';
+export const BULK_CREATE_INVENTORY_DONE = 'Bulk Create Inventory Done';
+export const BULK_UPDATE_INVENTORY_INIT = 'Bulk Update Inventory Init';
+export const BULK_UPDATE_INVENTORY_DONE = 'Bulk Update Inventory Done';
 
 export class GetInventoriesInit implements Action {
   readonly type = GET_INVENTORIES_INIT;
@@ -102,6 +106,39 @@ export class EditInventoryDone implements Action {
   }
 }
 
+export class BulkCreateInventoryInit implements Action {
+  readonly type = BULK_CREATE_INVENTORY_INIT;
+
+  constructor(public payload: Array<Inventory>) {
+    console.log('Action: ' + BULK_CREATE_INVENTORY_INIT);
+  }
+}
+
+export class BulkCreateInventoryDone implements Action {
+  readonly type = BULK_CREATE_INVENTORY_DONE;
+
+  constructor(public payload: INVResponse) {
+    console.log('Action: ' + BULK_CREATE_INVENTORY_DONE);
+  }
+}
+
+
+export class BulkUpdateInventoryInit implements Action {
+  readonly type = BULK_UPDATE_INVENTORY_INIT;
+
+  constructor(public payload: Array<Inventory>) {
+    console.log('Action: ' + BULK_UPDATE_INVENTORY_INIT);
+  }
+}
+
+export class BulkUpdateInventoryDone implements Action {
+  readonly type = BULK_UPDATE_INVENTORY_DONE;
+
+  constructor(public payload: INVResponse) {
+    console.log('Action: ' + BULK_UPDATE_INVENTORY_DONE);
+  }
+}
+
 
 export type InventoryActions =
   GetInventoriesInit
@@ -112,4 +149,8 @@ export type InventoryActions =
   | FetchInventoryInit
   | FetchInventoryDone
   | DeleteInventoryInit
-  | DeleteInventoryDone;
+  | DeleteInventoryDone
+  | BulkCreateInventoryInit
+  | BulkCreateInventoryDone
+  | BulkUpdateInventoryInit
+  | BulkUpdateInventoryDone;

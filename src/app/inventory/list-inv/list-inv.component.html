@@ -3,8 +3,9 @@
   <div class="action" fxFlex="100" fxLayoutAlign="end">
     <clr-button-group class="btn-primary">
       <clr-button *ngIf="sharedService?.userDetails?.admin" (click)="create()" class="btn-primary">Create</clr-button>
-      <clr-button *ngIf="sharedService?.userDetails?.admin" [disabled]="true">Bulk Create</clr-button>
-      <clr-button [disabled]="true">Bulk Update</clr-button>
+      <clr-button *ngIf="sharedService?.userDetails?.admin" (click)="isBulkCreateModalOpen = true">Bulk Create
+      </clr-button>
+      <clr-button (click)="isBulkUpdateModalOpen = true">Bulk Update</clr-button>
     </clr-button-group>
   </div>
 
@@ -17,7 +18,47 @@
   </ag-grid-angular>
 
   <ng-template #gridActionsColumn let-row>
-    <button title="Edit" class="btn btn-icon btn-primary" (click)="edit(row)"><cds-icon shape="pencil"></cds-icon></button>
-    <button *ngIf="sharedService?.userDetails?.admin" title="Delete" class="btn btn-icon btn-primary" (click)="delete(row)"><cds-icon shape="trash"></cds-icon></button>
+    <button title="Edit" class="btn btn-icon btn-primary" (click)="edit(row)">
+      <cds-icon shape="pencil"></cds-icon>
+    </button>
+    <button *ngIf="sharedService?.userDetails?.admin" title="Delete" class="btn btn-icon btn-primary"
+            (click)="delete(row)">
+      <cds-icon shape="trash"></cds-icon>
+    </button>
   </ng-template>
 </div>
+
+<!-- bulk create modal -->
+<clr-modal [(clrModalOpen)]="isBulkCreateModalOpen">
+  <h3 class="modal-title">Create Multiple Inventories</h3>
+  <div class="modal-body" fxLayout="column" fxLayoutGap="10px">
+    <ng-container *ngTemplateOutlet="xlsxTemplate;context:{operation:'create'}"></ng-container>
+    <a class="file-link" href="assets/files/bulk_inv_create_sample.xlsx">Download Sample XLSX</a>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="resetXLSX()">Cancel</button>
+    <button type="button" class="btn btn-primary" [disabled]="inventoriesForUpload.length===0"
+            (click)="uploadBulkInventoryData('create')">Submit
+    </button>
+  </div>
+</clr-modal>
+
+<!-- bulk update modal -->
+<clr-modal [(clrModalOpen)]="isBulkUpdateModalOpen">
+  <h3 class="modal-title">Update Multiple Inventories</h3>
+  <div class="modal-body" fxLayout="column" fxLayoutGap="10px">
+    <ng-container *ngTemplateOutlet="xlsxTemplate;context:{operation:'update'}"></ng-container>
+    <a class="file-link" href="assets/files/bulk_inv_update_sample.xlsx">Download Sample XLSX</a>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="resetXLSX()">Cancel</button>
+    <button type="button" class="btn btn-primary" [disabled]="inventoriesForUpload.length===0"
+            (click)="uploadBulkInventoryData('update')">Submit
+    </button>
+  </div>
+</clr-modal>
+
+<ng-template #xlsxTemplate let-op='operation'>
+  <app-xlsx-reader content="Select XLSX File" [acceptedFileType]="'.xls,.xlsx'"
+                   (sendData)="processXlsxData(op,$event)" #xlsx></app-xlsx-reader>
+</ng-template>

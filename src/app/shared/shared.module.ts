@@ -9,13 +9,15 @@ import {AgGridModule} from 'ag-grid-angular';
 import {ReactiveFormsModule} from '@angular/forms';
 import {AGGridTemplateRendererComponent} from '@app/app/shared/agGridTemplateRenderer/ag-grid-template-renderer.component';
 import { BreadcrumbsComponent } from './layout/breadcrumbs/breadcrumbs.component';
+import {XlsxReaderComponent} from '@app/app/shared/xlsx-reader/xlsx-reader.component';
 
 
 @NgModule({
   declarations: [
     LayoutComponent,
     AGGridTemplateRendererComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    XlsxReaderComponent
   ],
   imports: [
     CommonModule,
@@ -28,6 +30,7 @@ import { BreadcrumbsComponent } from './layout/breadcrumbs/breadcrumbs.component
   exports: [
     LayoutComponent,
     AGGridTemplateRendererComponent,
+    XlsxReaderComponent,
     FlexLayoutModule,
     ClarityModule,
     ReactiveFormsModule,

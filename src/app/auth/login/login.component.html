@@ -12,10 +12,11 @@
       </clr-input-container>
       <clr-password-container>
         <label class="clr-sr-only">Password</label>
-        <input type="password" name="password" clrPassword placeholder="Password" formControlName="password"/>
+        <input type="password" name="password" (keyup.enter)="btnLogin.click()" clrPassword placeholder="Password"
+               formControlName="password"/>
       </clr-password-container>
       <button type="button" [disabled]="loginForm.invalid" (keyup.enter)="doSubmit()" (click)="doSubmit()"
-              class="btn btn-primary">Login
+              class="btn btn-primary" #btnLogin>Login
       </button>
     </div>
   </form>

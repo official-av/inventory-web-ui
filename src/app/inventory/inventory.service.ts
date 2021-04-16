@@ -1,4 +1,4 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {environment} from "@app/environments/environment";
 import {Inventory} from "@app/app/_interfaces/Inventory.interface";
@@ -41,15 +41,26 @@ export class InventoryService {
     return this.http.delete(`${this.inventoryURL}/${invID}`);
   }
 
-  // region TODO: Bulk Inv ops
-  createBulkInventories() {
+  // region Bulk Inv ops
+  createBulkInventories(inventories: Array<Inventory>) {
+    return this.http.post(`${this.inventoryURL}/bulk`, {inventories});
   }
 
-  updateBulkInventories() {
+  updateBulkInventories(inventories: Array<Inventory>) {
+    return this.http.put(`${this.inventoryURL}/bulk`, {inventories});
   }
 
-  deleteBulkInventories() {
+  deleteBulkInventories(invIDs: string) {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: {invIDs},
+    };
+    return this.http.delete(`${this.inventoryURL}/bulk`, options);
   }
+
+  // endregion
 
   searchUsers(keyword: string) {
     return this.http.get(`${this.usersURL}?q=${keyword}`).pipe(
@@ -57,6 +68,5 @@ export class InventoryService {
     );
   }
 
-  // endregion
 
 }
