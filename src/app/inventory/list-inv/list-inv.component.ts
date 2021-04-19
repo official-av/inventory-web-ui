@@ -6,8 +6,10 @@ import {State} from '@app/app/_interfaces/State.interface';
 import {select, Store} from '@ngrx/store';
 import {
   BULK_CREATE_INVENTORY_DONE,
+  BULK_DELETE_INVENTORY_DONE,
   BULK_UPDATE_INVENTORY_DONE,
   BulkCreateInventoryInit,
+  BulkDeleteInventoryInit,
   BulkUpdateInventoryInit,
   DELETE_INVENTORY_DONE,
   DeleteInventoryInit,
@@ -26,6 +28,7 @@ import {XlsxReaderComponent} from '@app/app/shared/xlsx-reader/xlsx-reader.compo
   styleUrls: ['./list-inv.component.scss']
 })
 export class ListInvComponent implements OnInit, AfterViewInit {
+  private gridAPI;
   inventoriesData$: Observable<Array<Inventory>>;
   @ViewChild('gridActionsColumn') gridActionsColumn: TemplateRef<any>;
   columnDefs: Array<any>;
@@ -45,7 +48,7 @@ export class ListInvComponent implements OnInit, AfterViewInit {
               private toastr: ToastrService) {
     this.fetchInventories();
     this.action$.pipe(
-      ofType(DELETE_INVENTORY_DONE, BULK_CREATE_INVENTORY_DONE, BULK_UPDATE_INVENTORY_DONE)
+      ofType(DELETE_INVENTORY_DONE, BULK_CREATE_INVENTORY_DONE, BULK_UPDATE_INVENTORY_DONE, BULK_DELETE_INVENTORY_DONE)
     ).subscribe(val => this.fetchInventories());
   }
 
@@ -55,7 +58,7 @@ export class ListInvComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.columnDefs = [
-      {field: 'id', width: 150},
+      {field: 'id', width: 150, checkboxSelection: true},
       {field: 'name', sortable: true, filter: true},
       {field: 'weight', sortable: true, filter: true},
       {field: 'price', sortable: true, filter: true},
@@ -117,7 +120,12 @@ export class ListInvComponent implements OnInit, AfterViewInit {
       const headerCount = operation === 'create' ? 4 : 5;
       const inventories = [] as Array<Inventory>;
       // validate headers
-      const headersInvalid = !this.invCreateXLSXHeaders.every(x => headers.some(y => y.toLowerCase() === x.toLowerCase()));
+      let headersInvalid;
+      if (operation === 'update') {
+        headersInvalid = !this.invUpdateXLSXHeaders.every(x => headers.some(y => y.toLowerCase() === x.toLowerCase()));
+      } else {
+        headersInvalid = !this.invCreateXLSXHeaders.every(x => headers.some(y => y.toLowerCase() === x.toLowerCase()));
+      }
       if (headersInvalid) {
         return operation === 'create'
           ? 'Invalid Headers - Please include Name,Weight,Price and Users headers in same order!'
@@ -129,25 +137,36 @@ export class ListInvComponent implements OnInit, AfterViewInit {
           throw new Error(`for row ${index + 2}`);
         }
         const inv = {} as Inventory;
-        if (operation === 'update') { // for update only
+        if (operation === 'update') { // for update operation
           inv.id = Number(x[0]);
           if (isNaN(inv.id)) {
             throw new Error(`Invalid ID ${x[0]} for row ${index + 2}`);
           }
+          inv.name = x[1];
+          inv.weight = x[2].toString();
+          inv.price = Number(x[3]);
+          inv.users = Array.from(x[4].toString().split(','), userID => {
+            const id = Number(userID);
+            if (isNaN(id)) {
+              throw new Error(`Invalid users ${x[4]} for row ${index + 2}`);
+            }
+            return {id};
+          });
+        } else { // for create operation
+          inv.name = x[0];
+          inv.weight = x[1].toString();
+          inv.price = Number(x[2]);
+          inv.users = Array.from(x[3].toString().split(','), userID => {
+            const id = Number(userID);
+            if (isNaN(id)) {
+              throw new Error(`Invalid users ${x[3]} for row ${index + 2}`);
+            }
+            return {id};
+          });
         }
-        inv.name = x[1];
-        inv.weight = x[2].toString();
-        inv.price = Number(x[3]);
         if (isNaN(inv.price)) {
           throw new Error(`Invalid price ${x[3]} for row ${index + 2}`);
         }
-        inv.users = Array.from(x[4].toString().split(','), userID => {
-          const id = Number(userID);
-          if (isNaN(id)) {
-            throw new Error(`Invalid users ${x[4]} for row ${index + 2}`);
-          }
-          return {id};
-        });
         inventories.push(inv);
       });
       this.inventoriesForUpload = inventories;
@@ -163,6 +182,20 @@ export class ListInvComponent implements OnInit, AfterViewInit {
     this.isBulkUpdateModalOpen = false;
     this.xlsxFile = null;
     this.inventoriesForUpload = [] as Array<Inventory>;
+  }
+
+  onGridReady(params) {
+    this.gridAPI = params.api;
+  }
+
+  areRowsSelected() {
+    return this.gridAPI && this.gridAPI.getSelectedNodes().map(node => node.data.id).length >= 1;
+  }
+
+  bulkDelete() {
+    const invIDs = this.gridAPI.getSelectedNodes().map(node => node.data.id);
+    this.store.dispatch(new BulkDeleteInventoryInit(invIDs));
+    this.gridAPI.deselectAll();
   }
 
 }

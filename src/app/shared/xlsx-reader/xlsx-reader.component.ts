@@ -3,8 +3,7 @@ import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-xlsx-reader',
-  templateUrl: './xlsx-reader.component.html',
-  styleUrls: ['./xlsx-reader.component.css']
+  templateUrl: './xlsx-reader.component.html'
 })
 export class XlsxReaderComponent implements OnInit {
   @ViewChild('btnFile', {static: false}) fileInput;

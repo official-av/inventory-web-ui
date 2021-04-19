@@ -13,6 +13,7 @@ export class SharedService {
 
   constructor(private router: Router) {
     const token = localStorage.getItem('token');
+    console.log('shared service, token-', token);
     if (token) {
       this.initUserDetails(token);
     }

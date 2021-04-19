@@ -6,6 +6,7 @@
       <clr-button *ngIf="sharedService?.userDetails?.admin" (click)="isBulkCreateModalOpen = true">Bulk Create
       </clr-button>
       <clr-button (click)="isBulkUpdateModalOpen = true">Bulk Update</clr-button>
+      <clr-button [disabled]="!areRowsSelected()" (click)="bulkDelete()">Bulk Delete</clr-button>
     </clr-button-group>
   </div>
 
@@ -13,7 +14,9 @@
     class="ag-theme-material"
     pagination
     [rowData]="inventoriesData$|async"
+    rowSelection='multiple'
     [columnDefs]="columnDefs"
+    (gridReady)="onGridReady($event)"
   >
   </ag-grid-angular>
 

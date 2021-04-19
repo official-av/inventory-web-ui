@@ -5,10 +5,10 @@ import {InventoryService} from '@app/app/inventory/inventory.service';
 import {Inventory} from '@app/app/_interfaces/Inventory.interface';
 import {INVResponse} from '@app/app/_interfaces/INVResponse.interface';
 import {
-  BULK_CREATE_INVENTORY_INIT,
+  BULK_CREATE_INVENTORY_INIT, BULK_DELETE_INVENTORY_INIT,
   BULK_UPDATE_INVENTORY_INIT,
   BulkCreateInventoryDone,
-  BulkCreateInventoryInit,
+  BulkCreateInventoryInit, BulkDeleteInventoryDone, BulkDeleteInventoryInit,
   BulkUpdateInventoryDone,
   BulkUpdateInventoryInit,
   CREATE_INVENTORY_INIT,
@@ -81,5 +81,12 @@ export class InventoryEffects {
     ofType(BULK_UPDATE_INVENTORY_INIT),
     switchMap((action: BulkUpdateInventoryInit) => this.invService.updateBulkInventories(action.payload)
       .pipe(map((res: INVResponse) => new BulkUpdateInventoryDone(res)))
+    ));
+
+  @Effect()
+  public deleteBulkInventoryEffect$ = this.action$.pipe(
+    ofType(BULK_DELETE_INVENTORY_INIT),
+    switchMap((action: BulkDeleteInventoryInit) => this.invService.deleteBulkInventories(action.payload)
+      .pipe(map((res: INVResponse) => new BulkDeleteInventoryDone(res)))
     ));
 }
