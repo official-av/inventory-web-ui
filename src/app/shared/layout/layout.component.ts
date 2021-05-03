@@ -12,7 +12,7 @@ export class LayoutComponent implements OnInit {
   userDetails: User;
 
   constructor(public shared: SharedService) {
-    shared.userDetailsSubject$.subscribe(val => {
+    shared.userDetailsSubject$.subscribe((val:User) => {
       console.log(val);
       this.userDetails = val;
     });

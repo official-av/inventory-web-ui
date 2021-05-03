@@ -2,7 +2,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {environment} from "@app/environments/environment";
 import {Inventory} from "@app/app/_interfaces/Inventory.interface";
-import {flatMap} from 'rxjs/operators';
+import {flatMap, map, shareReplay, tap} from 'rxjs/operators';
 import {INVResponse} from '@app/app/_interfaces/INVResponse.interface';
 import {Observable, of} from 'rxjs';
 import {User} from '@app/app/_interfaces/User.interface';
@@ -11,16 +11,15 @@ import {User} from '@app/app/_interfaces/User.interface';
   providedIn: 'root'
 })
 export class InventoryService {
-  inventoryURL = `${environment.baseURL}/inventory`;
-  usersURL = `${environment.baseURL}/user`;
+  private inventoryURL = `${environment.baseURL}/inventory`;
+  private usersURL = `${environment.baseURL}/user`;
+  inventories$ = this.http.get<INVResponse>(this.inventoryURL).pipe(
+    map(res => res.data),
+    tap(inventories => console.log('inventories', JSON.stringify(inventories))),
+    shareReplay(1)
+  );
 
   constructor(private http: HttpClient) {
-  }
-
-  getInventories() {
-    return this.http.get(this.inventoryURL).pipe(
-      flatMap((res: INVResponse) => of(res.data as Array<Inventory>))
-    );
   }
 
   getInventoryDetailsByID(invID: number): Observable<Inventory> {

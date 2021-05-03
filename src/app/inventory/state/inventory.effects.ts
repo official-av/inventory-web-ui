@@ -37,7 +37,7 @@ export class InventoryEffects {
   public initGetInventoriesEffect$ = this.action$.pipe(
     ofType(GET_INVENTORIES_INIT),
     switchMap((action: GetInventoriesInit) =>
-      this.invService.getInventories()
+      this.invService.inventories$
         .pipe(map((res: Array<Inventory>) => new GetInventoriesDone(res)))
     ));
 

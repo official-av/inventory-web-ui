@@ -16,7 +16,6 @@ export class BreadcrumbsComponent implements OnInit {
       const routes = this.router.url.split('/');
       routes.splice(0, 1);
       routes.forEach((x: string, index: number) => this.routesArr.push({name: x, route: this.getRoute(routes, index)}));
-      console.log(this.routesArr);
     });
   }
 
@@ -24,7 +23,6 @@ export class BreadcrumbsComponent implements OnInit {
   }
 
   public getRoute(routesArr: string[], index: number): string {
-    console.log(index);
     let route = '';
     if (index === 0) {
       route = routesArr[0];

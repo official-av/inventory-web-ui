@@ -6,7 +6,7 @@
       <clr-button *ngIf="sharedService?.userDetails?.admin" (click)="isBulkCreateModalOpen = true">Bulk Create
       </clr-button>
       <clr-button (click)="isBulkUpdateModalOpen = true">Bulk Update</clr-button>
-      <clr-button [disabled]="!areRowsSelected()" (click)="bulkDelete()">Bulk Delete</clr-button>
+      <clr-button *ngIf="sharedService?.userDetails?.admin" [disabled]="!areRowsSelected()"  (click)="bulkDelete()">Bulk Delete</clr-button>
     </clr-button-group>
   </div>
 

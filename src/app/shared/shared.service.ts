@@ -1,19 +1,19 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
-import {User} from "@app/app/_interfaces/User.interface";
-import {parseJWT} from "@app/app/shared/utils/parseJWT";
-import {BehaviorSubject} from 'rxjs';
+import {User} from '@app/app/_interfaces/User.interface';
+import {parseJWT} from '@app/app/shared/utils/parseJWT';
+import {ReplaySubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedService {
   public curModule = '';
-  public userDetailsSubject$ = new BehaviorSubject<User>(null);
+  private user: User;
+  public userDetailsSubject$ = new ReplaySubject();
 
   constructor(private router: Router) {
     const token = localStorage.getItem('token');
-    console.log('shared service, token-', token);
     if (token) {
       this.initUserDetails(token);
     }
@@ -37,15 +37,17 @@ export class SharedService {
   }
 
   public set userDetails(user: User) {
+    this.user = user;
     this.userDetailsSubject$.next(user);
   }
 
   public get userDetails(): User {
-    return {...this.userDetailsSubject$.value};
+    return {...this.user};
   }
 
   public logout() {
     localStorage.clear();
     this.router.navigate(['auth']);
+    this.userDetails = {} as User;
   }
 }

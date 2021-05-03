@@ -16,7 +16,6 @@ export class AppComponent {
     ClarityIcons.addIcons(userIcon, pencilIcon, trashIcon);
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)).subscribe(event => {
-      console.log(this.router.url.split('/'));
       this.shared.curModule = this.router.url.split('/')[1];
     });
   }
