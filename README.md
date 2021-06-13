@@ -1,4 +1,15 @@
-# AlgoInventoryWebUI
+# InventoryWebUI
+
+An Angular 11 App to demonstrate Inventory Management.
+Top Features include:
+1. Layered Architecture Pattern
+2. NgRX based State Management
+3. RxJS based Reactive UI
+4. Themed with Clarity Design
+5. Leverages AG-Grid for custom data tables
+
+For demo: http://inv-web-ui.s3-website-us-east-1.amazonaws.com/
+Reach out to me at anmolvashisthaav@gmail.com for demo credentials
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.5.
 
